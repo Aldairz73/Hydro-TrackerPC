@@ -1,8 +1,11 @@
 export const login = (username: string, password: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-        // Simula una autenticación (puedes conectar con una API real más tarde)
+        // Simula una autenticación
         setTimeout(() => {
-            if (username === 'admin' && password === 'password') {
+            if (
+                (username === 'Aldair' && password === '1234') ||
+                (username === 'Alessio' && password === '4321')
+            ) {
                 resolve(true);
             } else {
                 reject('Usuario o contraseña incorrectos');
