@@ -6,14 +6,12 @@ import { TextField, Button, Container, Typography } from '@mui/material';
 
 const schema = yup.object({
     name: yup.string().required('El nombre es obligatorio').min(3, 'Debe tener al menos 3 caracteres'),
-    email: yup.string().email('Correo electrónico inválido').required('El correo es obligatorio'),
-    password: yup.string().required('La contraseña es obligatoria').min(6, 'Debe tener al menos 6 caracteres'),
+    goal: yup.number().required('La meta diaria es obligatoria').positive('La meta debe ser positiva'),
 });
 
 type RegisterFormValues = {
     name: string;
-    email: string;
-    password: string;
+    goal: number;
 };
 
 const Register: React.FC = () => {
@@ -26,6 +24,7 @@ const Register: React.FC = () => {
     });
 
     const onSubmit = (data: RegisterFormValues) => {
+        localStorage.setItem(data.name, JSON.stringify({ goal: data.goal, progress: 0 }));
         console.log('Datos enviados:', data);
     };
 
@@ -44,22 +43,13 @@ const Register: React.FC = () => {
                     helperText={errors.name?.message}
                 />
                 <TextField
-                    label="Correo Electrónico"
-                    type="email"
+                    label="Meta Diaria (litros)"
+                    type="number"
                     fullWidth
                     margin="normal"
-                    {...register('email')}
-                    error={!!errors.email}
-                    helperText={errors.email?.message}
-                />
-                <TextField
-                    label="Contraseña"
-                    type="password"
-                    fullWidth
-                    margin="normal"
-                    {...register('password')}
-                    error={!!errors.password}
-                    helperText={errors.password?.message}
+                    {...register('goal')}
+                    error={!!errors.goal}
+                    helperText={errors.goal?.message}
                 />
                 <Button
                     type="submit"

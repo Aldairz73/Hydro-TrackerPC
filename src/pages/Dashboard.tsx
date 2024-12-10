@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../services/userService';
 import { getExercises } from '../services/exerciseService';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard: React.FC = () => {
+    const location = useLocation();
+    const { username } = location.state as { username: string };
+    const { user } = useAuth();
     const [userCount, setUserCount] = useState(0);
     const [exerciseCount, setExerciseCount] = useState(0);
     const [exercises, setExercises] = useState<{ id: number; name: string; description: string; weight: number; repetitions: number; muscle: string }[]>([]);
+    const [goal, setGoal] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,6 +24,26 @@ const Dashboard: React.FC = () => {
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (user) {
+            const userData = JSON.parse(localStorage.getItem(user) || '{}');
+            setGoal(userData.goal);
+            setProgress(userData.progress);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        const userData = JSON.parse(localStorage.getItem(username) || '{}');
+        setGoal(userData.goal);
+        setProgress(userData.progress);
+    }, [username]);
+
+    const addProgress = (amount: number) => {
+        const newProgress = progress + amount;
+        setProgress(newProgress);
+        localStorage.setItem(username, JSON.stringify({ goal, progress: newProgress }));
+    };
 
     return (
         <div>
@@ -38,6 +64,11 @@ const Dashboard: React.FC = () => {
                     </li>
                 ))}
             </ul>
+            <p>Meta Diaria: {goal} litros</p>
+            <p>Progreso: {((progress / (goal * 1000)) * 100).toFixed(2)}%</p>
+            <p>Fecha: {new Date().toLocaleDateString()}</p>
+            <button onClick={() => addProgress(250)}>Agregar 250ml</button>
+            <button onClick={() => addProgress(500)}>Agregar 500ml</button>
         </div>
     );
 };

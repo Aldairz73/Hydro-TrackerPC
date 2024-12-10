@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
-import { login } from '../services/authService';
-import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-    const { login: setUser } = useAuth();
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const success = await login(username, password);
-            if (success) {
-                setUser(username);
-                navigate('/dashboard'); // Redirige al dashboard si tiene éxito
-            }
-        } catch (err) {
-            setError(err as string);
+        const userData = localStorage.getItem(username);
+        if (userData) {
+            navigate('/dashboard', { state: { username } });
+        } else {
+            alert('Usuario no registrado');
         }
     };
 
@@ -28,7 +20,7 @@ const Login: React.FC = () => {
             <h2>Iniciar Sesión</h2>
             <form onSubmit={handleLogin}>
                 <div>
-                    <label>Usuario:</label>
+                    <label>Nombre:</label>
                     <input
                         type="text"
                         value={username}
@@ -36,16 +28,6 @@ const Login: React.FC = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Contraseña:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <button type="submit">Ingresar</button>
             </form>
         </div>
