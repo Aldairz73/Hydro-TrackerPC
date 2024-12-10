@@ -5,11 +5,81 @@
 @layer base {
   body {
     @apply bg-white text-black;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f7fa; /* Fondo azul claro */
+    color: #00796b; /* Texto azul oscuro */
   }
 
   @media (prefers-color-scheme: dark) {
     body {
       @apply bg-gray-900 text-white;
     }
+  }
+}
+
+h2 {
+  color: #004d40; /* Título azul más oscuro */
+}
+
+input, button, textarea {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #00796b; /* Texto azul oscuro */
+  border: 1px solid #004d40; /* Borde azul oscuro */
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b2dfdb; /* Fondo azul claro al pasar el ratón */
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #00796b; /* Texto azul oscuro */
+  margin-bottom: 8px;
+}
+
+.input-group input:focus, .input-group textarea:focus {
+  outline: none;
+  border-color: #004d40; /* Borde azul oscuro al enfocar */
+}
+
+.error-message {
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  input, button, textarea {
+    padding: 8px;
   }
 }

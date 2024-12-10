@@ -12,19 +12,19 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#1f1f1f' }}>
+        <nav style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#004d40' }}>
             <div>
                 <Link to="/">
-                    <button>Home</button>
+                    <button style={{ marginRight: '10px' }}>Home</button>
                 </Link>
                 <Link to="/login">
-                    <button>Login</button>
+                    <button style={{ marginRight: '10px' }}>Login</button>
                 </Link>
                 <Link to="/dashboard">
-                    <button>Dashboard</button>
+                    <button style={{ marginRight: '10px' }}>Dashboard</button>
                 </Link>
                 <Link to="/register">
-                    <button>Registrar Usuario</button>
+                    <button style={{ marginRight: '10px' }}>Registrar Usuario</button>
                 </Link>
             </div>
             <ul style={{ display: 'flex', listStyleType: 'none', margin: 0, padding: 0 }}>

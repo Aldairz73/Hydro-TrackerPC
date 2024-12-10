@@ -46,17 +46,17 @@ const Dashboard: React.FC = () => {
     };
 
     return (
-        <div>
+        <div style={{ padding: '20px', backgroundColor: '#e0f7fa', borderRadius: '8px' }}>
             <h2>Dashboard</h2>
             <p>Usuarios Registrados: {userCount}</p>
             <p>Ejercicios Disponibles: {exerciseCount}</p>
             <Link to="/add-exercise">
-                <button>Añadir Nuevo Ejercicio</button>
+                <button style={{ marginBottom: '20px' }}>Añadir Nuevo Ejercicio</button>
             </Link>
             <h3>Lista de Ejercicios</h3>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {exercises.map((exercise) => (
-                    <li key={exercise.id} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #333', borderRadius: '4px' }}>
+                    <li key={exercise.id} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #004d40', borderRadius: '4px' }}>
                         <strong>{exercise.name}</strong>: {exercise.description}<br />
                         <strong>Peso:</strong> {exercise.weight} kg<br />
                         <strong>Repeticiones:</strong> {exercise.repetitions}<br />
@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
             <p>Meta Diaria: {goal} litros</p>
             <p>Progreso: {((progress / (goal * 1000)) * 100).toFixed(2)}%</p>
             <p>Fecha: {new Date().toLocaleDateString()}</p>
-            <button onClick={() => addProgress(250)}>Agregar 250ml</button>
+            <button onClick={() => addProgress(250)} style={{ marginRight: '10px' }}>Agregar 250ml</button>
             <button onClick={() => addProgress(500)}>Agregar 500ml</button>
         </div>
     );
