@@ -19,6 +19,7 @@ import AddExercise from './pages/AddExercise' // Importa el componente AddExerci
 function App() {
   return (
     <Router>
+      <Header />
       <Navbar /> {/* Usa el componente Navbar */}
       <Routes>
         <Route path="/" element={<Home />} />
